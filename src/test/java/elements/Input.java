@@ -19,7 +19,7 @@ public class Input {
         driver.findElement(By.xpath(String.format(locator, label))).sendKeys(text);
     }
 
-    public void writeForParentAccount(String text) {
+    public void writeWithSearch(String text) {
         write(text);
         driver.findElement(By.cssSelector(String.format(locatorForParentAccount, text))).click();
     }

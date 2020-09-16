@@ -3,7 +3,10 @@ package pages;
 import elements.Input;
 import elements.Select;
 import elements.TextArea;
+import io.qameta.allure.Step;
+import models.Contact;
 import org.openqa.selenium.WebDriver;
+import utils.AllureUtils;
 
 public class NewContactModal {
     WebDriver driver;
@@ -12,35 +15,37 @@ public class NewContactModal {
         this.driver = driver;
     }
 
-    public ContactsPage createContact() {
-        new Input(driver, "Phone").write("+375176254654");
-        new Input(driver, "Mobile").write("+375336254654");
-        new Select(driver, "Salutation").select("Mr.");
-        new Input(driver, "First Name").write("Sasha");
-        new Input(driver, "Last Name").write("Znak");
-        new Input(driver, "Account Name").writeForParentAccount("Sasha Znak");
-        new Input(driver, "Email").write("sasha_znak@mailinator.com");
-        new Input(driver, "Title").write("Hello");
-        new Input(driver, "Reports To").writeForParentAccount("Frolov");
-        new TextArea(driver, "Mailing Street").write("Moskvina");
-        new TextArea(driver, "Other Street").write("Moskvina");
-        new Input(driver, "Mailing City").write("Minsk");
-        new Input(driver, "Mailing State/Province").write("Minks district");
-        new Input(driver, "Other City").write("Minsk");
-        new Input(driver, "Other State/Province").write("Minks district");
-        new Input(driver, "Mailing Zip/Postal Code").write("220082");
-        new Input(driver, "Mailing Country").write("375");
-        new Input(driver, "Other Zip/Postal Code").write("220082");
-        new Input(driver, "Other Country").write("375");
-        new Input(driver, "Fax").write("2557965");
-        new Input(driver, "Department").write("School");
-        new Input(driver, "Home Phone").write("375172557965");
-        new Input(driver, "Other Phone").write("375172557965");
-        new Input(driver, "Asst. Phone").write("375172557965");
-        new Input(driver, "Assistant").write("Petya");
-        new Select(driver, "Lead Source").select("Advertisement");
-        new Input(driver, "Birthdate").write("29.10.1991");
-        new TextArea(driver, "Description").write("likes testing");
+    @Step("Writing the data for creating new contact")
+    public ContactsPage createContact(Contact contact) {
+        new Input(driver, "Phone").write(contact.getPhone());
+        new Input(driver, "Mobile").write(contact.getMobile());
+        new Select(driver, "Salutation").select(contact.getSalutation());
+        new Input(driver, "First Name").write(contact.getFirstName());
+        new Input(driver, "Last Name").write(contact.getLastName());
+        new Input(driver, "Account Name").writeWithSearch(contact.getAccountName());
+        new Input(driver, "Email").write(contact.getEmail());
+        new Input(driver, "Title").write(contact.getTitle());
+        new Input(driver, "Reports To").writeWithSearch(contact.getReportsTo());
+        new TextArea(driver, "Mailing Street").write(contact.getMailingStreet());
+        new TextArea(driver, "Other Street").write(contact.getOtherStreet());
+        new Input(driver, "Mailing City").write(contact.getMailingCity());
+        new Input(driver, "Mailing State/Province").write(contact.getMailingStateProvince());
+        new Input(driver, "Other City").write(contact.getOtherCity());
+        new Input(driver, "Other State/Province").write(contact.getOtherStateProvince());
+        new Input(driver, "Mailing Zip/Postal Code").write(contact.getMailingZipPostalCode());
+        new Input(driver, "Mailing Country").write(contact.getMailingCountry());
+        new Input(driver, "Other Zip/Postal Code").write(contact.getOtherZipPostalCode());
+        new Input(driver, "Other Country").write(contact.getOtherCountry());
+        new Input(driver, "Fax").write(contact.getFax());
+        new Input(driver, "Department").write(contact.getDepartment());
+        new Input(driver, "Home Phone").write(contact.getHomePhone());
+        new Input(driver, "Other Phone").write(contact.getOtherPhone());
+        new Input(driver, "Asst. Phone").write(contact.getAsstPhone());
+        new Input(driver, "Assistant").write(contact.getAssistant());
+        new Select(driver, "Lead Source").select(contact.getLeadSource());
+        new Input(driver, "Birthdate").write(contact.getBirthdate());
+        new TextArea(driver, "Description").write(contact.getDescription());
+        AllureUtils.takeScreenshot(driver);
         return new ContactsPage(driver);
     }
 

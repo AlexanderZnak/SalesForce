@@ -1,25 +1,18 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
-
+@Listeners(TestListener.class)
 public class ContactsTest extends BaseTest {
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class, description = "Create new contact")
+    @Description("Checking of creating new contact")
+    @TmsLink("1404013600")
     public void createContact() {
-        loginPage
-                .openPage()
-                .login()
-                .isPageOpened();
-        boolean created = contactsPage
-                .openPage()
-                .clickNewContact()
-                .createContact()
-                .clickSaveOrCancelOrNew("Save")
-                .openPage()
-                .newContactWasCreated("Sasha Znak");
-        assertTrue(created);
+        contactsSteps.createNewContact();
     }
 
 }

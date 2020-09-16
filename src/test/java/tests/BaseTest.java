@@ -4,18 +4,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.*;
+import org.testng.annotations.Listeners;
+import pages.NewAccountModal;
+import pages.NewContactModal;
+import steps.AccountsSteps;
+import steps.ContactsSteps;
+import steps.HomeSteps;
+import steps.LoginSteps;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
-    LoginPage loginPage;
     NewAccountModal newAccountModal;
-    HomePage homePage;
-    AccountsPage accountsPage;
-    ContactsPage contactsPage;
     NewContactModal newContactModal;
+    AccountsSteps accountsSteps;
+    ContactsSteps contactsSteps;
+    HomeSteps homeSteps;
+    LoginSteps loginSteps;
 
     @BeforeMethod
     public void setUp() {
@@ -23,12 +30,12 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        loginPage = new LoginPage(driver);
         newAccountModal = new NewAccountModal(driver);
-        homePage = new HomePage(driver);
-        accountsPage = new AccountsPage(driver);
-        contactsPage = new ContactsPage(driver);
         newContactModal = new NewContactModal(driver);
+        accountsSteps = new AccountsSteps(driver);
+        contactsSteps = new ContactsSteps(driver);
+        homeSteps = new HomeSteps(driver);
+        loginSteps = new LoginSteps(driver);
     }
 
     @AfterMethod(alwaysRun = true)

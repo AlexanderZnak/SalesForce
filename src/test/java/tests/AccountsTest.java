@@ -1,25 +1,18 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
-
+@Listeners(TestListener.class)
 public class AccountsTest extends BaseTest {
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class, description = "Create new account")
+    @Description("Checking of creating new account")
+    @TmsLink("1404013600")
     public void createAccount() {
-        loginPage
-                .openPage()
-                .login()
-                .isPageOpened();
-        boolean created = accountsPage
-                .openPage()
-                .clickNewAccount()
-                .createAccount()
-                .clickSaveOrCancelOrNew("Save")
-                .openPage()
-                .newAccountWasCreated("Sasha Znak");
-        assertTrue(created);
+        accountsSteps.createNewAccount();
     }
 
 }
