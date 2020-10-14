@@ -15,7 +15,7 @@ public class NewContactModal {
         this.driver = driver;
     }
 
-    @Step("Writing the data for creating new contact")
+    @Step("Writing the data for creating new contact: '{contact}'")
     public ContactsPage createContact(Contact contact) {
         new Input(driver, "Phone").write(contact.getPhone());
         new Input(driver, "Mobile").write(contact.getMobile());

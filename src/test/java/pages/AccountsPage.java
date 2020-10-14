@@ -21,7 +21,7 @@ public class AccountsPage extends BasePage {
         super(driver);
     }
 
-    @Step("Open Account page")
+    @Step("Opening Account page")
     public AccountsPage openPage() {
         driver.get("https://ap16.lightning.force.com/lightning/o/Account/list?filterName=Recent");
         isPageOpened();
@@ -60,14 +60,14 @@ public class AccountsPage extends BasePage {
         return new NewAccountModal(driver);
     }
 
-    @Step("Clicking save or cancel, or save&new for ending of creating the new account")
+    @Step("Clicking : '{name}'")
     public AccountsPage clickSaveOrCancelOrNew(String name) {
         driver.findElement(By.cssSelector(String.format(saveCancelNew, name))).click();
         AllureUtils.takeScreenshot(driver);
         return this;
     }
 
-    @Step("Checking whether the new account was created")
+    @Step("Checking whether the new account: '{accountName}' was created")
     public boolean newAccountWasCreated(String accountName) {
         List<WebElement> listOfAccounts = driver.findElements(ACCOUNTS);
         boolean a = false;

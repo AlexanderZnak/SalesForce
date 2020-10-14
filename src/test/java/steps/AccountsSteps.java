@@ -17,20 +17,22 @@ public class AccountsSteps {
         accountsPage = new AccountsPage(driver);
     }
 
-    @Step("Creating new account and checking the new account was created")
+    @Step("Creating new account")
     public AccountsSteps createNewAccount() {
         Account account = new Account("Sasha Znak", "petya", "375336254654", "2342", "jobs.tut.by", "Analyst", "Banking", "20", "20000", "likes testing", "Prityckogo", "Prityckogo", "Minsk", "Minsk district", "Minsk", "Minsk district", "220082", "375", "220082", "375");
-        loginPage
-                .openPage()
-                .login()
-                .isPageOpened();
-        boolean created = accountsPage
+        accountsPage
                 .openPage()
                 .clickNewAccount()
                 .createAccount(account)
-                .clickSaveOrCancelOrNew("Save")
+                .clickSaveOrCancelOrNew("Save");
+        return this;
+    }
+
+    @Step("Validate is new account: '{accountName}' created")
+    public AccountsSteps validateIsAccountCreated(String accountName) {
+        boolean created = accountsPage
                 .openPage()
-                .newAccountWasCreated("Sasha Znak");
+                .newAccountWasCreated(accountName);
         assertTrue(created);
         return this;
     }

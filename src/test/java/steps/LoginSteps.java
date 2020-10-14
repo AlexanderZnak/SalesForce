@@ -11,12 +11,17 @@ public class LoginSteps {
         loginPage = new LoginPage(driver);
     }
 
-    @Step("Success login")
-    public LoginSteps login() {
+    @Step("Login with email: '{email}', password: '{password}'")
+    public LoginSteps login(String email, String password) {
         loginPage
                 .openPage()
-                .login()
-                .isPageOpened();
+                .login(email, password);
+        return this;
+    }
+
+    @Step("Validate is login page opened")
+    public LoginSteps validateIsPageOpened() {
+        loginPage.isPageOpened();
         return this;
     }
 

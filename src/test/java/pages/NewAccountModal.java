@@ -15,7 +15,7 @@ public class NewAccountModal {
         this.driver = driver;
     }
 
-    @Step("Writing the data for creating new account")
+    @Step("Writing the data for creating new account: '{account}")
     public AccountsPage createAccount(Account account) {
         new Input(driver, "Account Name").write(account.getAccountName());
         new Input(driver, "Parent Account").writeWithSearch(account.getParentAccount());

@@ -18,7 +18,7 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Step("Open Login page")
+    @Step("Opening Login page")
     public LoginPage openPage() {
         driver.get("https://login.salesforce.com/");
         isPageOpened();
@@ -37,11 +37,11 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("Insert username and password for login")
-    public HomePage login() {
+    @Step("Inserting username: '{email}' and password: '{password}' for login")
+    public HomePage login(String email, String password) {
         openPage();
-        driver.findElement(USERNAME).sendKeys("sasha_znak-hf5l@force.com");
-        driver.findElement(PASSWORD).sendKeys("123guki1303");
+        driver.findElement(USERNAME).sendKeys(email);
+        driver.findElement(PASSWORD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
         AllureUtils.takeScreenshot(driver);
         return new HomePage(driver);

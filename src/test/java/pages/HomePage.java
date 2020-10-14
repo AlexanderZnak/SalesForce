@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    @Step("Open Home page")
+    @Step("Opening Home page")
     public HomePage openPage() {
         driver.get("https://ap16.lightning.force.com/lightning/page/home");
         isPageOpened();

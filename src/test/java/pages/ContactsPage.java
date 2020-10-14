@@ -16,7 +16,7 @@ public class ContactsPage extends BasePage {
         super(driver);
     }
 
-    @Step("Open Contact page")
+    @Step("Opening Contact page")
     public ContactsPage openPage() {
         driver.get("https://ap16.lightning.force.com/lightning/o/Contact/list?filterName=Recent");
         isPageOpened();
@@ -42,17 +42,17 @@ public class ContactsPage extends BasePage {
         return new NewContactModal(driver);
     }
 
-    @Step("Clicking save or cancel, or save&new for ending of creating the new contact")
+    @Step("Clicking : '{name}'")
     public ContactsPage clickSaveOrCancelOrNew(String name) {
         new AccountsPage(driver).clickSaveOrCancelOrNew(name);
         AllureUtils.takeScreenshot(driver);
         return this;
     }
 
-    @Step("Checking whether the new contact was created")
-    public boolean newContactWasCreated(String accountName) {
+    @Step("Checking whether the new contact: '{contactName}' was created")
+    public boolean newContactWasCreated(String contactName) {
         AllureUtils.takeScreenshot(driver);
-        return new AccountsPage(driver).newAccountWasCreated(accountName);
+        return new AccountsPage(driver).newAccountWasCreated(contactName);
     }
 
 }
