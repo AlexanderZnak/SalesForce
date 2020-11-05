@@ -1,9 +1,11 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.AllureUtils;
 
 import static org.testng.Assert.fail;
 
@@ -16,14 +18,18 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Opening Login page")
     public LoginPage openPage() {
         driver.get("https://login.salesforce.com/");
         isPageOpened();
+        AllureUtils.takeScreenshot(driver);
         return this;
     }
 
+    @Step("Checking whether the login page opened")
     public LoginPage isPageOpened() {
         try {
+            AllureUtils.takeScreenshot(driver);
             wait.until(ExpectedConditions.visibilityOfElementLocated(USERNAME));
         } catch (TimeoutException e) {
             fail("Page wasn't opened");
@@ -31,11 +37,13 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public HomePage login() {
+    @Step("Inserting username: '{email}' and password: '{password}' for login")
+    public HomePage login(String email, String password) {
         openPage();
-        driver.findElement(USERNAME).sendKeys("sasha_znak-hf5l@force.com");
-        driver.findElement(PASSWORD).sendKeys("123guki1303");
+        driver.findElement(USERNAME).sendKeys(email);
+        driver.findElement(PASSWORD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        AllureUtils.takeScreenshot(driver);
         return new HomePage(driver);
     }
 
